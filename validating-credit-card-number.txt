@@ -1,0 +1,14 @@
+##Question: https://www.hackerrank.com/challenges/validating-credit-card-number/forum
+
+
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+import re
+
+
+for _ in range(int(input())):
+    string = input()
+
+    if re.match(r"^[456]([\d]{15}|[\d]{3}(-[\d]{4}){3})$", string) and not re.search(r"([\d])\1\1\1", string.replace("-", "")):
+        print("Valid")
+    else:
+        print("Invalid")
