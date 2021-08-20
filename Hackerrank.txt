@@ -1,0 +1,25 @@
+# Validating Postal Codes
+regex_integer_in_range = r"^[1-9][0-9]{5}$"
+regex_alternating_repetitive_digit_pair = r"(\d)(?=.\1)"	
+import re
+P = input()
+
+print (bool(re.match(regex_integer_in_range, P)) 
+and len(re.findall(regex_alternating_repetitive_digit_pair, P)) < 2) 
+
+
+# New Companies
+select E.company_code, C.founder, count(distinct lead_manager_code), count(distinct senior_manager_code), count(distinct manager_code), count(distinct employee_code) from Employee E inner join Company C 
+on E.company_code = C.company_code group by E.company_code, C.founder order by E.company_code;
+
+# Binary Tree
+SELECT N, IF(P IS NULL,'Root',IF((SELECT COUNT(*) FROM BST WHERE P=B.N)>0,'Inner','Leaf')) FROM BST AS B ORDER BY N;
+
+# SQL Project Planning
+SELECT Start_Date, MIN(End_Date)
+FROM 
+    (SELECT Start_Date FROM Projects WHERE Start_Date NOT IN (SELECT End_Date FROM Projects)) s ,
+    (SELECT end_date FROM PROJECTS WHERE end_date NOT IN (SELECT start_date FROM PROJECTS)) e 
+where start_date < end_date
+GROUP BY start_date
+ORDER BY datediff(start_date, MIN(end_date)) DESC, start_date
